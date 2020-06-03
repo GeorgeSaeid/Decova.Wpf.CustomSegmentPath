@@ -57,18 +57,18 @@ namespace TextOnAPath
 
         static void OnTextPathPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            CustomSegmentPath textOnAPath = d as CustomSegmentPath;
+            CustomSegmentPath customPath = d as CustomSegmentPath;
 
-            if (textOnAPath == null)
+            if (customPath == null)
                 return;
 
             if (e.NewValue == e.OldValue || e.NewValue == null)
                 return;
 
-            textOnAPath.Path.Transform = null;
+            customPath.Path.Transform = null;
 
             //textOnAPath.UpdateSize();
-            textOnAPath.Update();
+            customPath.Update();
         }
         //####################################################################
         #endregion
@@ -107,15 +107,15 @@ namespace TextOnAPath
 
         static void OnDrawPathPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            CustomSegmentPath textOnAPath = d as CustomSegmentPath;
+            CustomSegmentPath customPath = d as CustomSegmentPath;
 
-            if (textOnAPath == null)
+            if (customPath == null)
                 return;
 
             if (e.NewValue == e.OldValue || e.NewValue == null)
                 return;
 
-            textOnAPath.Update();
+            customPath.Update();
         }
         //####################################################################
         #endregion
@@ -138,15 +138,15 @@ namespace TextOnAPath
 
         static void OnVisiblePathLinePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            CustomSegmentPath textOnAPath = d as CustomSegmentPath;
+            CustomSegmentPath customPath = d as CustomSegmentPath;
 
-            if (textOnAPath == null)
+            if (customPath == null)
                 return;
 
             if (e.NewValue == e.OldValue || e.NewValue == null)
                 return;
 
-            textOnAPath.Update();
+            customPath.Update();
         }
         //####################################################################
         #endregion
