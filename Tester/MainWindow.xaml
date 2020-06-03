@@ -1,0 +1,169 @@
+﻿<Window x:Class="TestApp.Window1"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:TextOnAPath="clr-namespace:TextOnAPath;assembly=Decova.Wpf.CustomSegmentPath"
+	Title="Text On a Path Test App" Height="500" Width="500">
+	<Window.Resources>
+		<!-- the geometries below are added to the combobox in code behind -->
+		<PathGeometry x:Key="PathGeometry" Figures="M50,242 C120,361 230.5,276.5 230.5,276.5 L305.98807,182.3422 C305.98807,182.3422 419.5,179.5002 367.5,265.49993 315.5,351.49966 238.50028,399.49924 238.50028,399.49924 L61.500017,420.49911"/>
+		<EllipseGeometry x:Key="EllipseGeometry" Center="50,100" RadiusX="50" RadiusY="100"/>
+		<!--<EllipseGeometry x:Key="SegmentGeometry" Center="3,3" RadiusX="3" RadiusY="3">
+			<EllipseGeometry.Transform>
+				<TranslateTransform X="-3" Y="-3"/>
+			</EllipseGeometry.Transform>
+		</EllipseGeometry>-->
+		<PathGeometry x:Key="SegmentGeometry">
+			<PathFigure IsClosed="True">
+				<PathFigure.Segments>
+					<PolyLineSegment>
+						<PolyLineSegment.Points>
+							<Point X="-3" Y="-3"/>
+							<Point X="0" Y="-3"/>
+							<Point X="3" Y="0"/>
+							<Point X="0" Y="3"/>
+							<Point X="-3" Y="3"/>
+						</PolyLineSegment.Points>
+					</PolyLineSegment>
+
+				</PathFigure.Segments>
+			</PathFigure>
+		</PathGeometry>
+		<RectangleGeometry x:Key="RectangleGeometry" Rect="0,0,100,200"/>
+		<LineGeometry x:Key="LineGeometry" StartPoint="50,0" EndPoint="100,100"/>
+	</Window.Resources>
+	<Window.LayoutTransform>
+		<ScaleTransform ScaleX="1.5" ScaleY="3"/>
+	</Window.LayoutTransform>
+	<Grid Background="#333333">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" MinHeight="79" />
+			<RowDefinition Height="Auto" MinHeight="54" />
+			<RowDefinition Height="Auto" MinHeight="30" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0" BorderBrush="Black" BorderThickness="2">
+			<StackPanel Orientation="Vertical" >
+				<Label HorizontalAlignment="Left" Margin="5">Enter Text:</Label>
+				<TextBox Margin="5" Name="textBox" Width="Auto"
+						 HorizontalAlignment="Left" MinWidth="200">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</TextBox>
+			</StackPanel>
+		</Border>
+
+		<Border Grid.Row="1" BorderBrush="Black" BorderThickness="2">
+			<StackPanel Orientation="Horizontal" >
+				<Label HorizontalAlignment="Left" Margin="5" Name="label2" 
+					   VerticalContentAlignment="Center">Select Geometry:</Label>
+				<ComboBox Margin="5" Name="ComboBoxSelectedGeo" VerticalContentAlignment="Center"/>
+			</StackPanel>
+		</Border>
+
+		<Border Grid.Row="2" BorderBrush="Black" BorderThickness="2">
+			<StackPanel Orientation="Horizontal">
+				<CheckBox IsChecked="False" HorizontalAlignment="Left" Margin="5" Name="drawGeometry">Draw Geometry?</CheckBox>
+				<CheckBox Margin="15,5,5,5" Name="scaleGeometry">Scale Geometry?</CheckBox>
+			</StackPanel>
+		</Border>
+
+		<Canvas Grid.Row="3" 
+				HorizontalAlignment="Stretch" 
+				VerticalAlignment="Stretch"
+>
+			<!--<Canvas.LayoutTransform>
+				<ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+			</Canvas.LayoutTransform>-->
+			<TextOnAPath:SegmentedPath Grid.Row="3"
+								 Margin="100"
+								 Segment="{StaticResource SegmentGeometry}"
+								 SegmentLength="6"
+								 IsPathVisible="{Binding ElementName=drawGeometry, 
+													Path=IsChecked}"
+								 Path="{Binding SelectedGeometry}"/>
+
+			<!--<Path Stroke="AliceBlue" StrokeThickness="3" Data="M50,242L56.6765441894531,252.56884765625 63.562744140625,261.998046875 70.6309509277344,270.34033203125 77.853515625,277.6484375 85.2027893066406,283.97509765625 92.651123046875,289.373046875 100.170867919922,293.89501953125 107.734375,297.59375 115.313995361328,300.52197265625 122.882080078125,302.732421875 130.410980224609,304.27783203125 137.873046875,305.2109375 145.240631103516,305.58447265625 152.486083984375,305.451171875 159.581756591797,304.86376953125 166.5,303.875 179.693603515625,300.904296875 191.845703125,296.9609375 202.735107421875,292.466796875 207.637176513672,290.14501953125 212.140625,287.84375 216.217803955078,285.61572265625 219.841064453125,283.513671875 222.982757568359,281.59033203125 225.615234375,279.8984375 227.710845947266,278.49072265625 229.241943359375,277.419921875 230.180877685547,276.73876953125 230.5,276.5 305.988067626953,182.342193603516 306.312103271484,182.336669921875 307.250152587891,182.331268310547 308.751159667969,182.342803955078 310.763977050781,182.388046264648 313.237548828125,182.483779907227 316.120758056641,182.646820068359 322.911804199219,183.241882324219 330.728393554688,184.307540893555 339.161773681641,185.978103637695 347.80322265625,188.387878417969 356.244018554688,191.671157836914 364.075469970703,195.962249755859 370.888793945313,201.395446777344 373.785949707031,204.582321166992 376.275299072266,208.105072021484 378.305786132813,211.980499267578 379.826263427734,216.225402832031 380.785675048828,220.856552124023 381.132934570313,225.890747070313 380.816925048828,231.344772338867 379.786590576172,237.235427856445 377.990814208984,243.579467773438 375.378540039063,250.39372253418 371.898620605469,257.694946289063 367.5,265.499938964844 357.48193359375,281.177124023438 347.02734375,295.949035644531 336.285675048828,309.801055908203 325.406280517578,322.718475341797 314.538635253906,334.686676025391 303.832122802734,345.691009521484 293.436157226563,355.716827392578 283.500122070313,364.749481201172 274.173492431641,372.774322509766 265.605651855469,379.776733398438 257.946014404297,385.742034912109 251.343978881836,390.655548095703 245.948974609375,394.502685546875 243.75080871582,396.021789550781 241.910415649414,397.268798828125 240.446502685547,398.241851806641 239.377716064453,398.939178466797 238.722747802734,399.358917236328 238.500274658203,399.499237060547 61.5000152587891,420.499114990234"/>-->
+
+			<Path Fill="Red">
+				<Path.Data>
+					<GeometryGroup>
+						<EllipseGeometry Center="50 242" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="56.6765441894531 252.56884765625" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="63.562744140625 261.998046875" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="70.6309509277344 270.34033203125" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="77.853515625 277.6484375" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="85.2027893066406 283.97509765625" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="92.651123046875 289.373046875" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="100.170867919922 293.89501953125" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="107.734375 297.59375" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="115.313995361328 300.52197265625" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="122.882080078125 302.732421875" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="130.410980224609 304.27783203125" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="137.873046875 305.2109375" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="145.240631103516 305.58447265625" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="152.486083984375 305.451171875" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="159.581756591797 304.86376953125" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="166.5 303.875" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="179.693603515625 300.904296875" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="191.845703125 296.9609375" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="202.735107421875 292.466796875" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="207.637176513672 290.14501953125" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="212.140625 287.84375" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="216.217803955078 285.61572265625" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="219.841064453125 283.513671875" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="222.982757568359 281.59033203125" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="225.615234375 279.8984375" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="227.710845947266 278.49072265625" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="229.241943359375 277.419921875" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="230.180877685547 276.73876953125" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="230.5 276.5" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="305.988067626953 182.342193603516" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="306.312103271484 182.336669921875" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="307.250152587891 182.331268310547" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="308.751159667969 182.342803955078" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="310.763977050781 182.388046264648" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="313.237548828125 182.483779907227" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="316.120758056641 182.646820068359" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="322.911804199219 183.241882324219" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="330.728393554688 184.307540893555" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="339.161773681641 185.978103637695" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="347.80322265625 188.387878417969" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="356.244018554688 191.671157836914" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="364.075469970703 195.962249755859" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="370.888793945313 201.395446777344" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="373.785949707031 204.582321166992" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="376.275299072266 208.105072021484" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="378.305786132813 211.980499267578" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="379.826263427734 216.225402832031" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="380.785675048828 220.856552124023" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="381.132934570313 225.890747070313" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="380.816925048828 231.344772338867" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="379.786590576172 237.235427856445" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="377.990814208984 243.579467773438" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="375.378540039063 250.39372253418" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="371.898620605469 257.694946289063" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="367.5 265.499938964844" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="357.48193359375 281.177124023438" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="347.02734375 295.949035644531" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="336.285675048828 309.801055908203" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="325.406280517578 322.718475341797" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="314.538635253906 334.686676025391" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="303.832122802734 345.691009521484" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="293.436157226563 355.716827392578" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="283.500122070313 364.749481201172" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="274.173492431641 372.774322509766" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="265.605651855469 379.776733398438" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="257.946014404297 385.742034912109" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="251.343978881836 390.655548095703" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="245.948974609375 394.502685546875" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="243.75080871582 396.021789550781" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="241.910415649414 397.268798828125" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="240.446502685547 398.241851806641" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="239.377716064453 398.939178466797" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="238.722747802734 399.358917236328" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="238.500274658203 399.499237060547" RadiusX="1" RadiusY="1"/>
+						<EllipseGeometry Center="61.5000152587891 420.499114990234" RadiusX="1" RadiusY="1"/>
+					</GeometryGroup>
+				</Path.Data>
+			</Path>
+		</Canvas>
+	</Grid>
+</Window>
