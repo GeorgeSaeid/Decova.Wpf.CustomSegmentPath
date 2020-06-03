@@ -53,9 +53,9 @@ namespace Decova.Wpf
 
         public static readonly DependencyProperty TextPathProperty =
             DependencyProperty.Register("Path", typeof(Geometry), typeof(CustomSegmentPath),
-            new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnTextPathPropertyChanged)));
+            new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnPathPropertyChanged)));
 
-        static void OnTextPathPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        static void OnPathPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             CustomSegmentPath customPath = d as CustomSegmentPath;
 
