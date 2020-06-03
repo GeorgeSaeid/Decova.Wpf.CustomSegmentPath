@@ -15,17 +15,17 @@ using System.Runtime.CompilerServices;
 namespace TextOnAPath
 {
     //[ContentProperty("Text")]
-    public class SegmentedPath : Control
+    public class CustomSegmentPath : Control
     {
         #region initialization
         //####################################################################
-        static SegmentedPath()
+        static CustomSegmentPath()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(SegmentedPath),
-                                                     new FrameworkPropertyMetadata(typeof(SegmentedPath)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(CustomSegmentPath),
+                                                     new FrameworkPropertyMetadata(typeof(CustomSegmentPath)));
         }
 
-        public SegmentedPath()
+        public CustomSegmentPath()
         {
             this.SegmentLength = 10;
         }
@@ -52,12 +52,12 @@ namespace TextOnAPath
         }
 
         public static readonly DependencyProperty TextPathProperty =
-            DependencyProperty.Register("Path", typeof(Geometry), typeof(SegmentedPath),
+            DependencyProperty.Register("Path", typeof(Geometry), typeof(CustomSegmentPath),
             new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnTextPathPropertyChanged)));
 
         static void OnTextPathPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            SegmentedPath textOnAPath = d as SegmentedPath;
+            CustomSegmentPath textOnAPath = d as CustomSegmentPath;
 
             if (textOnAPath == null)
                 return;
@@ -75,7 +75,7 @@ namespace TextOnAPath
 
         #region SegmentLength
         //***********************************************************************************************	
-        public static readonly DependencyProperty SegmentLengthProperty = DependencyProperty.Register("SegmentLength", typeof(double), typeof(SegmentedPath));
+        public static readonly DependencyProperty SegmentLengthProperty = DependencyProperty.Register("SegmentLength", typeof(double), typeof(CustomSegmentPath));
         public double SegmentLength
         {
             get
@@ -102,12 +102,12 @@ namespace TextOnAPath
         }
 
         public static readonly DependencyProperty IsPathVisibleProperty =
-            DependencyProperty.Register("IsPathVisible", typeof(bool), typeof(SegmentedPath),
+            DependencyProperty.Register("IsPathVisible", typeof(bool), typeof(CustomSegmentPath),
             new PropertyMetadata(false, new PropertyChangedCallback(OnDrawPathPropertyChanged)));
 
         static void OnDrawPathPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            SegmentedPath textOnAPath = d as SegmentedPath;
+            CustomSegmentPath textOnAPath = d as CustomSegmentPath;
 
             if (textOnAPath == null)
                 return;
@@ -133,12 +133,12 @@ namespace TextOnAPath
 
         // Using a DependencyProperty as the backing store for DrawFlattendPath.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty VisiblePathLineProperty =
-            DependencyProperty.Register("VisiblePathLine", typeof(bool), typeof(SegmentedPath),
+            DependencyProperty.Register("VisiblePathLine", typeof(bool), typeof(CustomSegmentPath),
             new PropertyMetadata(false, new PropertyChangedCallback(OnVisiblePathLinePropertyChanged)));
 
         static void OnVisiblePathLinePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            SegmentedPath textOnAPath = d as SegmentedPath;
+            CustomSegmentPath textOnAPath = d as CustomSegmentPath;
 
             if (textOnAPath == null)
                 return;
@@ -153,7 +153,7 @@ namespace TextOnAPath
 
         #region Segment
         //***********************************************************************************************	
-        public static readonly DependencyProperty SegmentProperty = DependencyProperty.Register("Segment", typeof(Geometry), typeof(SegmentedPath), new PropertyMetadata(Geometry.Parse("M0 0 L5 5")));
+        public static readonly DependencyProperty SegmentProperty = DependencyProperty.Register("Segment", typeof(Geometry), typeof(CustomSegmentPath), new PropertyMetadata(Geometry.Parse("M0 0 L5 5")));
         public Geometry Segment
         {
             get
@@ -234,6 +234,5 @@ namespace TextOnAPath
                 _layoutPanel.Children.Add(path);
             }
         }
-
     }
 }

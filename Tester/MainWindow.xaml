@@ -72,7 +72,7 @@
 			<!--<Canvas.LayoutTransform>
 				<ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
 			</Canvas.LayoutTransform>-->
-			<TextOnAPath:SegmentedPath Grid.Row="3"
+			<TextOnAPath:CustomSegmentPath Grid.Row="3"
 								 Margin="100"
 								 Segment="{StaticResource SegmentGeometry}"
 								 SegmentLength="6"
