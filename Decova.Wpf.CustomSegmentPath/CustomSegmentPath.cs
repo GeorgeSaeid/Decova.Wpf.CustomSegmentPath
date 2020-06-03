@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 using System.Windows.Markup;
 using System.Runtime.CompilerServices;
 
-namespace TextOnAPath
+namespace Decova.Wpf
 {
     //[ContentProperty("Text")]
     public class CustomSegmentPath : Control
@@ -67,7 +67,7 @@ namespace TextOnAPath
 
             customPath.Path.Transform = null;
 
-            //textOnAPath.UpdateSize();
+            //Decova.Wpf.UpdateSize();
             customPath.Update();
         }
         //####################################################################
